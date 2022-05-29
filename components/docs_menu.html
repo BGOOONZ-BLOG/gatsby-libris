@@ -1,0 +1,34 @@
+{% set site = include_dict.site %}
+{% set page = include_dict.page %}
+{% set root_docs_path = site.data.doc_sections.root_docs_path %}
+{% set root_page = getPage(root_docs_path) %}
+
+<nav id="docs-nav" class="docs-nav">
+  <div id="docs-nav-inside" class="docs-nav-inside sticky">
+    <button id="docs-nav-toggle" class="docs-nav-toggle">Navigate Docs<span class="icon-angle-right" aria-hidden="true"></span></button>
+    <div class="docs-nav-menu">
+      <ul id="docs-menu" class="docs-menu">
+        <li {{ classNames('docs-menu-item', {'current': page.url == root_page.url}) }}>
+          <a href="{{ root_page.url | relative_url }}">{{ root_page.title }}</a>
+        </li>
+        {% for section in site.data.doc_sections.sections %}
+          {% set section_path = root_docs_path | path_join(section) %}
+          {% set section_page = getPage(section_path) %}
+          {% set child_pages = getPages(section_path) | sort_array("weight") %}
+          {% set child_count = child_pages | length %}
+          {% set has_children = true if child_count > 0 else false %}
+          {% set is_current_page = true if page.url == section_page.url else false %}
+          {% set is_active = page.url | starts_with(section_page.url) %}
+          <li {{ classNames('docs-menu-item', {'has-children': has_children, 'current': is_current_page, 'active': is_active}) }}>
+            <a href="{{ section_page.url | relative_url }}">{{ section_page.title }}</a>
+            {% if has_children %}
+              <button class="docs-submenu-toggle"><span class="screen-reader-text">Submenu</span><span class="icon-angle-right" aria-hidden="true"></span></button>
+              {% set include_dict = {"child_pages": child_pages, "page": page, "site": site} %}
+              {% include "docs_submenu.html" %}
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul><!-- .docs-menu -->
+    </div><!-- .docs-nav-menu -->
+  </div><!-- .docs-nav-inside -->
+</nav><!-- .docs-nav -->
