@@ -1,33 +1,33 @@
-stackbitVersion: 4.0.0
-ssgName: unibit
-buildCommand: unibit build
-publishDir: output
+stackbitVersion: ~0.3.0
+ssgName: gatsby
+ssgVersion: 2.3.30
+buildCommand: npm run build
+publishDir: public
 staticDir: static
 uploadDir: images
-dataDir: data
-pagesDir: content
-pageLayoutKey: layout
+dataDir: src/data
+pagesDir: src/pages
+pageLayoutKey: template
 logicFields:
   - doc_sections.root_docs_path
   - doc_sections.sections
   - docs.weight
-metadata:
-  title: Libris
-  description: A documentation theme
-  author: Stackbit
-  authorURL: 'https://www.stackbit.com'
-  images:
-    small: images/demo-256x192.png
-    large: images/demo-1024x768.png
 models:
   config:
     type: config
     label: Site Configuration
     fields:
       - type: string
+        name: title
+        label: Title
+        description: Site title
+        required: true
+      - type: string
         name: domain
         label: Domain
-        description: The domain of your site, including the protocol, e.g. https://mysite.com/
+        description: >-
+          The domain of your site, including the protocol, e.g.
+          https://mysite.com/
       - type: image
         name: favicon
         label: Favicon
@@ -46,11 +46,13 @@ models:
       - type: model
         name: header
         label: Header Configuration
-        models: [header]
+        models:
+          - header
       - type: model
         name: footer
         label: Footer Configuration
-        models: [footer]
+        models:
+          - footer
   header:
     type: object
     label: Header Configuration
@@ -72,8 +74,8 @@ models:
         name: url
         label: Header Title (Logo) URL
         description: >-
-          The URL of the header title (logo). Useful if you want
-          the header title (logo) link to another URL, rather than the home page.
+          The URL of the header title (logo). Useful if you want the header
+          title (logo) link to another URL, rather than the home page.
       - type: boolean
         name: has_nav
         label: Enable Navigation Menu
@@ -85,7 +87,8 @@ models:
         description: List of navigation links
         items:
           type: model
-          models: [action_menu]
+          models:
+            - action_menu
   footer:
     type: object
     label: Footer Configuration
@@ -101,7 +104,8 @@ models:
         description: List of links in the footer
         items:
           type: model
-          models: [action]
+          models:
+            - action
       - type: boolean
         name: has_social
         label: Enable Social Links
@@ -113,7 +117,8 @@ models:
         description: List of social links in the footer
         items:
           type: model
-          models: [action]
+          models:
+            - action
   doc_sections:
     type: data
     file: doc_sections.yml
@@ -123,10 +128,10 @@ models:
         name: root_docs_path
         label: Root Documentation URL Path
         description: >-
-          The URL path under which the documentation pages will be generated. For
-          example, value "/" will place all documentation pages at the site root,
-          while value "/docs" will place all documentation pages under the "/docs"
-          path.
+          The URL path under which the documentation pages will be generated.
+          For example, value "/" will place all documentation pages at the site
+          root, while value "/docs" will place all documentation pages under the
+          "/docs" path.
         default: /docs
         required: true
       - type: list
@@ -139,7 +144,7 @@ models:
           type: string
   docs:
     type: page
-    urlPath: "/docs/{slug}"
+    urlPath: '/docs/{slug}'
     label: Documentation Pages
     layout: docs
     folder: docs
@@ -155,15 +160,18 @@ models:
         name: weight
         label: Weight
         description: >-
-          The navigation order of the documentation page. This value is ignored for parent section pages.
+          The navigation order of the documentation page. This value is ignored
+          for parent section pages.
       - type: string
         name: excerpt
         label: Excerpt
         description: >-
-          Short description of the documentation section. Displayed in documentation overview section.
+          Short description of the documentation section. Displayed in
+          documentation overview section.
       - type: model
         name: seo
-        models: [stackbit_page_meta]
+        models:
+          - stackbit_page_meta
   advanced:
     type: page
     label: Advanced Page
@@ -189,10 +197,11 @@ models:
             - section_hero
       - type: model
         name: seo
-        models: [stackbit_page_meta]
+        models:
+          - stackbit_page_meta
   blog:
     type: page
-    urlPath: "/blog"
+    urlPath: /blog
     label: Blog
     layout: blog
     file: blog/index.md
@@ -222,7 +231,8 @@ models:
         label: Read more link label
       - type: model
         name: seo
-        models: [stackbit_page_meta]
+        models:
+          - stackbit_page_meta
   page:
     type: page
     label: Page
@@ -244,10 +254,11 @@ models:
         description: The image shown in the background of the page header
       - type: model
         name: seo
-        models: [stackbit_page_meta]
+        models:
+          - stackbit_page_meta
   post:
     type: page
-    urlPath: "/blog/{slug}"
+    urlPath: '/blog/{slug}'
     label: Post
     layout: post
     folder: blog
@@ -283,7 +294,8 @@ models:
         description: The excerpt of the post displayed in the blog feed
       - type: model
         name: seo
-        models: [stackbit_page_meta]
+        models:
+          - stackbit_page_meta
   section:
     type: object
     label: Section
@@ -296,7 +308,7 @@ models:
       - type: string
         name: section_id
         label: Section ID
-        description: A unique identifier of the section, must not contain whitespace
+        description: 'A unique identifier of the section, must not contain whitespace'
   section_content:
     type: object
     label: Content Section
@@ -328,7 +340,8 @@ models:
         label: Action Buttons
         items:
           type: model
-          models: [action]
+          models:
+            - action
   section_cta:
     type: object
     label: CTA Section
@@ -344,7 +357,8 @@ models:
         label: Action Buttons
         items:
           type: model
-          models: [action]
+          models:
+            - action
   section_docs:
     type: object
     label: Documentation Overview Section
@@ -388,7 +402,8 @@ models:
         label: Grid Items
         items:
           type: model
-          models: [grid_item]
+          models:
+            - grid_item
   section_hero:
     type: object
     label: Hero Section
@@ -408,7 +423,8 @@ models:
         label: Action Buttons
         items:
           type: model
-          models: [action]
+          models:
+            - action
   grid_item:
     type: object
     label: Grid Item
@@ -439,7 +455,8 @@ models:
         label: Action Buttons
         items:
           type: model
-          models: [action]
+          models:
+            - action
   action:
     type: object
     label: Action
@@ -453,7 +470,7 @@ models:
         name: url
         label: URL
         required: true
-        default: "#"
+        default: '#'
       - type: enum
         name: style
         label: Style
@@ -486,7 +503,7 @@ models:
         name: no_follow
         label: No follow
         default: false
-        description: 'Add rel="nofollow" attribute to the link'
+        description: Add rel="nofollow" attribute to the link
   action_menu:
     type: object
     label: Parent Action
@@ -502,7 +519,8 @@ models:
         label: Sub-Navigation Links
         items:
           type: model
-          models: [action]
+          models:
+            - action
   stackbit_page_meta:
     type: object
     label: Page meta data
@@ -510,17 +528,17 @@ models:
       - type: string
         name: title
         label: Title
-        description: 'The page title that goes into the <title> tag'
-        default: ""
+        description: The page title that goes into the <title> tag
+        default: ''
       - type: string
         name: description
         label: Description
-        description: 'The page description that goes into the <meta name="description"> tag'
-        default: ""
+        description: The page description that goes into the <meta name="description"> tag
+        default: ''
       - type: list
         name: robots
         label: Robots
-        description: 'The items that go into the <meta name="robots"> tag'
+        description: The items that go into the <meta name="robots"> tag
         items:
           type: enum
           options:
@@ -535,24 +553,21 @@ models:
       - type: list
         name: extra
         label: Extra
-        description: 'Additional definition for specific meta tags such as open-graph, twitter, etc.'
+        description: >-
+          Additional definition for specific meta tags such as open-graph,
+          twitter, etc.
         items:
           type: object
           labelField: name
           fields:
             - type: string
               name: name
-              default: ""
+              default: ''
             - type: string
               name: value
-              default: ""
+              default: ''
             - type: string
               name: keyName
               default: name
             - type: boolean
               name: relativeUrl
-stackbit_banner:
-  show_banner: true
-  name: Libris
-  create_url: 'https://app.stackbit.com/create?theme=libris'
-  github_url: 'https://github.com/stackbit/stackbit-theme-libris'

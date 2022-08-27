@@ -1,3 +1,4 @@
+window.onGatsbyInitialClientRender = function() {
 /**
  * Main JS file for theme behaviours
  */
@@ -263,3 +264,4 @@ function anchorForId(id) {
 
 // Syntax Highlighter
 // Prism.highlightAll();
+};
