@@ -87,7 +87,7 @@ export default class Header extends React.Component {
                           null
                         ),
                         (action, action_idx) => {
-                          let page_url = _.trim(
+                          const page_url = _.trim(
                             _.get(this.props, "pageContext.url", null),
                             "/"
                           );

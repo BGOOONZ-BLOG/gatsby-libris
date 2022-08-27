@@ -12,7 +12,7 @@ import {
 
 export default class SectionDocs extends React.Component {
   render() {
-    let section = _.get(this.props, "section", null);
+    const section = _.get(this.props, "section", null);
     return (
       <section
         id={_.get(section, "section_id", null)}
@@ -49,7 +49,7 @@ export default class SectionDocs extends React.Component {
                   null
                 ),
                 (doc_section, doc_section_idx) => {
-                  let doc_section_path = pathJoin(
+                  const doc_section_path = pathJoin(
                     _.get(
                       this.props,
                       "pageContext.site.data.doc_sections.root_docs_path",
@@ -57,7 +57,7 @@ export default class SectionDocs extends React.Component {
                     ),
                     doc_section
                   );
-                  let doc_section_page = getPage(
+                  const doc_section_page = getPage(
                     this.props.pageContext.pages,
                     doc_section_path
                   );

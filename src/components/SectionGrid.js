@@ -12,7 +12,7 @@ import CtaButtons from "./CtaButtons";
 
 export default class SectionGrid extends React.Component {
   render() {
-    let section = _.get(this.props, "section", null);
+    const section = _.get(this.props, "section", null);
     return (
       <section
         id={_.get(section, "section_id", null)}

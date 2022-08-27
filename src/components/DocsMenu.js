@@ -13,10 +13,10 @@ import DocsSubmenu from "./DocsSubmenu";
 
 export default class DocsMenu extends React.Component {
   render() {
-    let site = _.get(this.props, "site", null);
-    let page = _.get(this.props, "page", null);
-    let root_docs_path = _.get(site, "data.doc_sections.root_docs_path", null);
-    let root_page = getPage(this.props.pageContext.pages, root_docs_path);
+    const site = _.get(this.props, "site", null);
+    const page = _.get(this.props, "page", null);
+    const root_docs_path = _.get(site, "data.doc_sections.root_docs_path", null);
+    const root_page = getPage(this.props.pageContext.pages, root_docs_path);
     return (
       <nav id="docs-nav" className="docs-nav">
         <div id="docs-nav-inside" className="docs-nav-inside sticky">
@@ -39,23 +39,21 @@ export default class DocsMenu extends React.Component {
               {_.map(
                 _.get(site, "data.doc_sections.sections", null),
                 (section, section_idx) => {
-                  let section_path = pathJoin(root_docs_path, section);
-                  let section_page = getPage(
+                  const section_path = pathJoin(root_docs_path, section);
+                  const section_page = getPage(
                     this.props.pageContext.pages,
                     section_path
                   );
-                  let child_pages = _.orderBy(
+                  const child_pages = _.orderBy(
                     getPages(this.props.pageContext.pages, section_path),
                     "frontmatter.weight"
                   );
-                  let child_count = _.size(child_pages);
-                  let has_children = child_count > 0 ? true : false;
-                  let is_current_page =
+                  const child_count = _.size(child_pages);
+                  const has_children = child_count > 0;
+                  const is_current_page =
                     _.get(page, "url", null) ===
-                    _.get(section_page, "url", null)
-                      ? true
-                      : false;
-                  let is_active = _.get(page, "url", null).startsWith(
+                    _.get(section_page, "url", null);
+                  const is_active = _.get(page, "url", null).startsWith(
                     _.get(section_page, "url", null)
                   );
                   return (

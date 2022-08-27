@@ -3,7 +3,7 @@ import _ from "lodash";
 
 export default class Icon extends React.Component {
   render() {
-    let icon = _.get(this.props, "icon", null);
+    const icon = _.get(this.props, "icon", null);
     return (
       <svg
         className="icon"

@@ -17,19 +17,16 @@ export default function Link({
   const internal = /^\/(?!\/)/.test(to);
 
   // Use Gatsby Link for internal links, and <a> for others
-  if (internal) {
-    return (
-      <GatsbyLink
-        to={to}
-        activeClassName={activeClassName}
-        partiallyActive={partiallyActive}
-        {...other}
-      >
-        {children}
-      </GatsbyLink>
-    );
-  }
-  return (
+  return internal ? (
+    <GatsbyLink
+      to={to}
+      activeClassName={activeClassName}
+      partiallyActive={partiallyActive}
+      {...other}
+    >
+      {children}
+    </GatsbyLink>
+  ) : (
     <a href={to} {...other}>
       {children}
     </a>

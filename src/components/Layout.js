@@ -46,7 +46,7 @@ export default class Body extends React.Component {
           {_.map(
             _.get(this.props, "pageContext.frontmatter.seo.extra", null),
             (meta, meta_idx) => {
-              let key_name = _.get(meta, "keyName", null) || "name";
+              const key_name = _.get(meta, "keyName", null) || "name";
               return _.get(meta, "relativeUrl", null) ? (
                 _.get(
                   this.props,
@@ -54,7 +54,7 @@ export default class Body extends React.Component {
                   null
                 ) &&
                   (() => {
-                    let domain = _.trim(
+                    const domain = _.trim(
                       _.get(
                         this.props,
                         "pageContext.site.siteMetadata.domain",
@@ -62,8 +62,8 @@ export default class Body extends React.Component {
                       ),
                       "/"
                     );
-                    let rel_url = withPrefix(_.get(meta, "value", null));
-                    let full_url = domain + rel_url;
+                    const rel_url = withPrefix(_.get(meta, "value", null));
+                    const full_url = domain + rel_url;
                     return (
                       <meta
                         key={meta_idx}
@@ -74,7 +74,7 @@ export default class Body extends React.Component {
                   })()
               ) : (
                 <meta
-                  key={meta_idx + ".1"}
+                  key={`${meta_idx}.1`}
                   {...attribute(key_name, _.get(meta, "name", null))}
                   content={_.get(meta, "value", null)}
                 />
